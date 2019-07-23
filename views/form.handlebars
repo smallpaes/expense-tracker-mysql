@@ -1,0 +1,76 @@
+<div class="form-container position-relative shadow">
+  <form action="{{#if isEditMode}}/expenses/edit/{{record.id}}?_method=PUT{{else}}/expenses/new{{/if}}" method="post"
+    class="needs-validation" novalidate>
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <div class="row mb-4">
+      <div class="col-2 ml-2">
+        <small class="text-danger pl-2">*必填</small>
+      </div>
+      <div class="col-8">
+        <h4 class="text-center font-weight-bold">請輸入你的支出</h4>
+      </div>
+    </div>
+    <!--Display error message-->
+    {{> message}}
+    <div class="form-group row ml-1 mr-4 justify-content-end">
+      <label for="name" class="col-2 col-form-label ">名稱*</label>
+      <input type="text" name="name" id="name" class="col-10 form-control" value="{{record.name}}" maxlength="8"
+        required>
+      <div class="valid-feedback col-10 p-0">
+        格式正確！
+      </div>
+      <div class="invalid-feedback col-10 p-0">
+        名字必填，且至多八個字！
+      </div>
+    </div>
+    <div class="form-group row ml-1 mr-4 justify-content-end">
+      <label for="date" class="col-2 col-form-label">日期*</label>
+      <input type="date" name="date" id="date" class="col-10 form-control" value="{{getInputDate record.date}}"
+        min="2000-01-01" max="2030-01-01" required>
+      <div class="valid-feedback col-10 p-0">
+        格式正確！
+      </div>
+      <div class="invalid-feedback col-10 p-0">
+        日期未填或不在正常區間！
+      </div>
+    </div>
+    <div class="form-group row ml-1 mr-4 justify-content-end">
+      <label for="category" class="col-2 col-form-label">類別*</label>
+      <select name="category" id="category" class="col-10 custom-select text-secondary" required>
+        <option value="" selected>類別選擇</option>
+        <option value="家居物業" {{isSelected record.category "家居物業"}}>家居物業</option>
+        <option value="交通出行" {{isSelected record.category "交通出行"}}>交通出行</option>
+        <option value="休閒娛樂" {{isSelected record.category "休閒娛樂"}}>休閒娛樂</option>
+        <option value="餐飲食品" {{isSelected record.category "餐飲食品"}}>餐飲食品</option>
+        <option value="其他" {{isSelected record.category "其他"}}>其他</option>
+      </select>
+      <div class="valid-feedback col-10 p-0">
+        格式正確！
+      </div>
+      <div class="invalid-feedback col-10 p-0">
+        類別必須選一個！
+      </div>
+    </div>
+    <div class="form-group row ml-1 mr-4 justify-content-end">
+      <label for="amount" class="col-2 col-form-label">金額*</label>
+      <input type="number" name="amount" id="amount" class="col-10 form-control" value="{{record.amount}}" min="1"
+        max="99999" required>
+      <div class="valid-feedback col-10 p-0">
+        格式正確！
+      </div>
+      <div class="invalid-feedback col-10 p-0">
+        必填一個小於十萬的金額！
+      </div>
+    </div>
+    <div class="row ml-1 mr-4">
+      <div class="col-2"></div>
+      <div class="col-10 p-0 mt-1">
+        {{#if record}}
+        <input type="submit" value="送出" class="btn btn-info btn-block">
+        {{else}}
+        <input type="submit" value="新增支出" class="btn btn-info btn-block">
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</div>
