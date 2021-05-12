@@ -23,7 +23,7 @@
     "express-validator": "^6.1.1",
     "method-override": "^3.0.0",
     "mysql2": "^1.6.5",
-    "nodemailer": "^6.3.0",
+    "nodemailer": "^6.4.16",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^1.19.1",
     "passport": "^0.4.0",
